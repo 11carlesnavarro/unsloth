@@ -36,7 +36,7 @@ import numpy as np
 os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
 
 if "CUDA_VISIBLE_DEVICES" in os.environ:
-    os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+    #os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     devices = os.environ["CUDA_VISIBLE_DEVICES"]
     # Check if there are multiple cuda devices set in env
     if not devices.isdigit():
@@ -50,7 +50,7 @@ if "CUDA_VISIBLE_DEVICES" in os.environ:
         os.environ["CUDA_VISIBLE_DEVICES"] = str(first_id)
 else:
     # warnings.warn("Unsloth: 'CUDA_VISIBLE_DEVICES' is not set. We shall set it ourselves.")
-    os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+    #os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 pass
 
