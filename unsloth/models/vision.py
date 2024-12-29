@@ -29,7 +29,6 @@ from peft import LoraConfig, TaskType, get_peft_model
 from transformers import set_seed as transformers_set_seed
 from unsloth_zoo.peft_utils import (
     get_peft_regex,
-    merge_and_overwrite_lora,
     SKIP_QUANTIZATION_MODULES,
 )
 from triton import __version__ as triton_version
@@ -186,6 +185,10 @@ class FastBaseVisionModel:
         pass
         patch_saving_functions(model, vision = True)
         patch_saving_functions(tokenizer, vision = True)
+
+        # Fix gradient accumulation
+        from transformers.trainer import Trainer
+        patch_gradient_accumulation_fix(Trainer)
 
         # Save tokenizer for inference purposes
         tokenizer.padding_side = "left" # Force inference
